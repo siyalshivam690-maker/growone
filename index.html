@@ -72,7 +72,7 @@
     padding:18px 0;
     border-bottom:1px solid var(--border);
   }
-  .nav-row{display:flex; align-items:center; justify-content:space-between;}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;}
   .logo{
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
@@ -82,8 +82,8 @@
     gap:11px;
   }
   .logo-mark{
-    width:38px;
-    height:38px;
+    width:52px;
+    height:52px;
     border-radius:50%;
     flex-shrink:0;
     display:block;
@@ -395,7 +395,7 @@
     color:var(--text);
     padding:12px 13px;
     border-radius:7px;
-    font-size:14.5px;
+    font-size:16px;
     font-family:'Inter',sans-serif;
   }
   input:focus, select:focus{outline:2px solid var(--bull); outline-offset:1px;}
@@ -460,13 +460,36 @@
   }
 
   @media (max-width:760px){
+    .wrap{padding:0 18px;}
+    .hero{padding:52px 0 44px;}
+    .section{padding:54px 0;}
+    .hero p.sub{font-size:16px;}
+    .hero-cta-row{gap:10px;}
+    .btn-primary, .btn-secondary{width:100%; text-align:center;}
+    .chart-frame{padding:16px 16px 0; margin-top:38px;}
+    svg.chart{height:140px;}
     .problem-grid{grid-template-columns:1fr;}
     .why-grid{grid-template-columns:1fr;}
     .stats-strip{grid-template-columns:1fr;}
     .stat{border-left:none; border-top:1px solid var(--border);}
     .stat:first-child{border-top:none;}
-    .form-card{grid-template-columns:1fr; padding:28px;}
-    .p-row{grid-template-columns:40px 1fr;}
+    .form-card{grid-template-columns:1fr; padding:26px 20px;}
+    .p-row{grid-template-columns:34px 1fr; gap:14px; padding:22px 0;}
+    .p-row h3{font-size:17px;}
+    .tick-item{font-size:11.5px;}
+  }
+
+  @media (max-width:480px){
+    .logo{font-size:16px; gap:8px;}
+    .logo-mark{width:42px; height:42px;}
+    .nav-cta{width:100%; text-align:center; padding:11px 16px; font-size:13.5px;}
+    nav{padding:14px 0;}
+    .eyebrow{font-size:11px;}
+    .platform-strip{gap:8px;}
+    .platform-badge{font-size:12px; padding:7px 13px 7px 9px;}
+    .form-side h2{font-size:22px;}
+    .section h2{font-size:24px;}
+    .disclaimer p{font-size:12px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -499,7 +522,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow">
-      <img src="grow-one-ads-logo.png" alt="Grow One Ads logo" class="logo-mark" style="width:22px;height:22px;box-shadow:none;">
+      <img src="grow-one-ads-logo.png" alt="Grow One Ads logo" class="logo-mark" style="width:30px;height:30px;box-shadow:none;">
       Stock Market Niche · Telegram Lead Generation
     </div>
     <h1>आपके Telegram चैनल में <em>असली</em>, active traders लाने वाले Meta Ads.</h1>
