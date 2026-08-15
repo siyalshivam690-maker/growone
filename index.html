@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grow One Ads — Stock Market Telegram Leads via Meta Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#03060C;
+    --panel:#0A101C;
+    --panel-2:#0F1728;
+    --border:#1B2740;
+    --text:#EAF1FB;
+    --muted:#8A97B0;
+    --bull:#1FA9FF;
+    --bull-dim:#0B2C4C;
+    --bear:#FF5C5C;
+    --gold:#4FC3FF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- TICKER ---------- */
+  .ticker-bar{
+    background:#080B10;
+    border-bottom:1px solid var(--border);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:9px 0;
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .ticker-track{
+    display:inline-flex;
+    gap:36px;
+    animation:scroll-left 32s linear infinite;
+    padding-left:100%;
+  }
+  @keyframes scroll-left{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+  }
+  .tick-item{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .tick-item b{color:var(--text); font-weight:500;}
+  .up{color:var(--bull);}
+  .down{color:var(--bear);}
+
+  /* ---------- NAV ---------- */
+  nav{
+    padding:18px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-row{display:flex; align-items:center; justify-content:space-between;}
+  .logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:19px;
+    display:flex;
+    align-items:center;
+    gap:11px;
+  }
+  .logo-mark{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    flex-shrink:0;
+    display:block;
+    object-fit:cover;
+    background:#000;
+    box-shadow:0 0 0 1px var(--border), 0 4px 14px -4px rgba(31,169,255,.45);
+  }
+  .logo span.tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    color:var(--bull);
+    border:1px solid var(--bull-dim);
+    background:var(--bull-dim);
+    padding:2px 6px;
+    border-radius:4px;
+    margin-left:6px;
+    font-weight:500;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+  }
+  .platform-strip{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .platform-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:8px 16px 8px 10px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--text);
+  }
+  .icon-inline{vertical-align:middle; display:inline-block;}
+  h3 .icon-inline{margin-right:8px;}
+
+  .nav-cta{
+    background:var(--bull);
+    color:#03101E;
+    font-weight:700;
+    font-size:14px;
+    padding:9px 18px;
+    border-radius:6px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 70px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--bull);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:6px;height:6px;
+    background:var(--bull);
+    border-radius:50%;
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;} 50%{opacity:.35;}
+  }
+  .hero h1{
+    font-size:clamp(34px,5.2vw,58px);
+    line-height:1.08;
+    max-width:820px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--bull);
+  }
+  .hero p.sub{
+    margin-top:22px;
+    font-size:17.5px;
+    color:var(--muted);
+    max-width:600px;
+  }
+  .hero-cta-row{
+    margin-top:34px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .btn-primary{
+    background:var(--bull);
+    color:#03101E;
+    font-weight:700;
+    font-size:15.5px;
+    padding:15px 26px;
+    border-radius:7px;
+    text-decoration:none;
+    display:inline-block;
+    box-shadow:0 0 0 rgba(31,169,255,0);
+    transition:transform .15s ease, box-shadow .3s ease;
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 26px -6px rgba(31,169,255,.5);
+  }
+  .btn-secondary{
+    border:1px solid var(--border);
+    color:var(--text);
+    font-weight:600;
+    font-size:15px;
+    padding:14px 24px;
+    border-radius:7px;
+    text-decoration:none;
+    background:var(--panel);
+  }
+  .hero-note{
+    margin-top:16px;
+    font-size:13px;
+    color:var(--muted);
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* Chart visual */
+  .chart-frame{
+    margin-top:56px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:10px;
+    padding:22px 22px 0;
+    overflow:hidden;
+  }
+  .chart-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding-bottom:16px; border-bottom:1px solid var(--border);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+  .chart-head .val{color:var(--bull); font-size:15px; font-weight:600;}
+  svg.chart{display:block; width:100%; height:180px;}
+  .chart-labels{
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px; color:var(--muted);
+    padding:8px 2px 16px;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:78px 0;}
+  .section.alt{background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .sec-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px; color:var(--gold);
+    text-transform:uppercase; letter-spacing:.08em;
+    margin-bottom:12px;
+  }
+  .section h2{
+    font-size:clamp(26px,3.4vw,36px);
+    max-width:640px;
+  }
+  .section p.lead{
+    margin-top:14px;
+    color:var(--muted);
+    font-size:16px;
+    max-width:600px;
+  }
+
+  /* ---------- PROBLEM GRID ---------- */
+  .problem-grid{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .problem-card{
+    background:var(--bg);
+    padding:26px;
+  }
+  .problem-card .bear-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--bear);
+    margin-bottom:10px;
+  }
+  .problem-card h3{font-size:17px; margin-bottom:8px;}
+  .problem-card p{color:var(--muted); font-size:14.5px;}
+
+  /* ---------- PROCESS ---------- */
+  .process-list{margin-top:48px;}
+  .p-row{
+    display:grid;
+    grid-template-columns:70px 1fr;
+    gap:24px;
+    padding:28px 0;
+    border-top:1px solid var(--border);
+    align-items:start;
+  }
+  .p-row:last-child{border-bottom:1px solid var(--border);}
+  .p-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--bull);
+  }
+  .p-row h3{font-size:19px; margin-bottom:6px;}
+  .p-row p{color:var(--muted); font-size:15px; max-width:600px;}
+
+  /* ---------- WHY US ---------- */
+  .why-grid{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+  }
+  .why-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px;
+  }
+  .why-card .icon{
+    width:34px;height:34px;
+    border-radius:7px;
+    background:var(--bull-dim);
+    color:var(--bull);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .why-card h3{font-size:16.5px; margin-bottom:6px;}
+  .why-card p{color:var(--muted); font-size:14.5px;}
+
+  /* ---------- STATS STRIP ---------- */
+  .stats-strip{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .stat{
+    padding:26px;
+    text-align:center;
+    border-left:1px solid var(--border);
+  }
+  .stat:first-child{border-left:none;}
+  .stat .n{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:26px;
+    font-weight:600;
+    color:var(--bull);
+  }
+  .stat .l{
+    font-size:12.5px;
+    color:var(--muted);
+    margin-top:6px;
+  }
+
+  /* ---------- FORM ---------- */
+  .form-section{
+    padding:80px 0 90px;
+  }
+  .form-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:44px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  .form-side h2{font-size:28px;}
+  .form-side p{color:var(--muted); margin-top:12px; font-size:15px;}
+  .form-side ul{margin-top:22px; list-style:none;}
+  .form-side li{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size:14.5px; color:var(--text);
+    margin-bottom:12px;
+  }
+  .form-side li::before{
+    content:'✓';
+    color:var(--bull);
+    font-weight:700;
+    flex-shrink:0;
+  }
+  form{display:flex; flex-direction:column; gap:14px;}
+  label{font-size:12.5px; color:var(--muted); font-family:'IBM Plex Mono',monospace; margin-bottom:4px; display:block;}
+  input, select{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:12px 13px;
+    border-radius:7px;
+    font-size:14.5px;
+    font-family:'Inter',sans-serif;
+  }
+  input:focus, select:focus{outline:2px solid var(--bull); outline-offset:1px;}
+  .submit-btn{
+    background:var(--bull);
+    color:#03101E;
+    font-weight:700;
+    border:none;
+    padding:14px;
+    border-radius:7px;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:4px;
+  }
+  .form-msg{
+    display:none;
+    background:var(--bull-dim);
+    border:1px solid var(--bull);
+    color:var(--bull);
+    padding:12px 14px;
+    border-radius:7px;
+    font-size:13.5px;
+  }
+
+  /* ---------- DISCLAIMER ---------- */
+  .disclaimer{
+    background:#080B10;
+    border-top:1px solid var(--border);
+    padding:40px 0;
+  }
+  .disclaimer h4{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    margin-bottom:12px;
+  }
+  .disclaimer p{
+    font-size:12.5px;
+    color:var(--muted);
+    max-width:820px;
+    line-height:1.7;
+  }
+
+  footer{
+    padding:28px 0 40px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  [data-reveal]{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  [data-reveal].in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  @media (max-width:760px){
+    .problem-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;}
+    .stats-strip{grid-template-columns:1fr;}
+    .stat{border-left:none; border-top:1px solid var(--border);}
+    .stat:first-child{border-top:none;}
+    .form-card{grid-template-columns:1fr; padding:28px;}
+    .p-row{grid-template-columns:40px 1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker-bar">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<nav>
+  <div class="wrap nav-row">
+    <div class="logo">
+      <img src="grow-one-ads-logo.png" alt="Grow One Ads logo" class="logo-mark">
+      Grow One Ads
+      <span class="tag">
+        <svg class="icon-inline" width="12" height="8" viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,20 C4,20 2,14 2,9 C2,4 5,1 8.5,1 C12,1 14.5,4 17,8 C19.5,4 22,1 25.5,1 C29,1 32,4 32,9 C32,14 30,20 24,20 C20,20 17.5,15.5 17,14 C16.5,15.5 14,20 10,20 Z" fill="none" stroke="#1FA9FF" stroke-width="3"/>
+        </svg>
+        META ADS
+      </span>
+    </div>
+    <a href="#lead-form" class="nav-cta">Free Telegram Audit माँगें</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">
+      <img src="grow-one-ads-logo.png" alt="Grow One Ads logo" class="logo-mark" style="width:22px;height:22px;box-shadow:none;">
+      Stock Market Niche · Telegram Lead Generation
+    </div>
+    <h1>आपके Telegram चैनल में <em>असली</em>, active traders लाने वाले Meta Ads.</h1>
+    <p class="sub">Grow One Ads ऐसी agency है जो सिर्फ़ stock market niche पर काम करती है — trading channels, investing communities और finfluencers के लिए Meta (Facebook + Instagram) Ads चलाकर Telegram join दिलवाते हैं. कोई bots नहीं, कोई fake activity नहीं — सिर्फ़ interested audience.</p>
+    <div class="hero-cta-row">
+      <a href="#lead-form" class="btn-primary">Telegram Growth Audit फ्री में बुक करें</a>
+      <a href="#process" class="btn-secondary">हम कैसे काम करते हैं</a>
+    </div>
+    <div class="hero-note">// No bots · No fake joins · Meta ad-policy compliant campaigns</div>
+
+    <div class="platform-strip">
+      <span class="platform-badge">
+        <svg width="20" height="12" viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10,20 C4,20 2,14 2,9 C2,4 5,1 8.5,1 C12,1 14.5,4 17,8 C19.5,4 22,1 25.5,1 C29,1 32,4 32,9 C32,14 30,20 24,20 C20,20 17.5,15.5 17,14 C16.5,15.5 14,20 10,20 Z" fill="none" stroke="#1FA9FF" stroke-width="3"/>
+        </svg>
+        Meta Ads से campaigns
+      </span>
+      <span class="platform-badge">
+        <svg width="18" height="18" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="20" fill="#1FA9FF"/>
+          <path d="M9 20 L30 11 L26 30 L19.5 24.5 L16 27.5 L15.5 21.5 Z" fill="#ffffff"/>
+          <path d="M16 21.5 L26 14 L18.5 23 Z" fill="#cfeaff"/>
+        </svg>
+        Telegram पर joining
+      </span>
+    </div>
+
+    <div class="chart-frame" data-reveal>
+      <div class="chart-head">
+        <span>TELEGRAM_JOINS · CAMPAIGN VIEW</span>
+        <span class="val">▲ trending</span>
+      </div>
+      <svg class="chart" viewBox="0 0 600 180" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1FA9FF" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#1FA9FF" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,150 L50,140 L100,145 L150,120 L200,128 L250,95 L300,105 L350,78 L400,85 L450,55 L500,60 L550,30 L600,20 L600,180 L0,180 Z" fill="url(#fillGrad)"/>
+        <path d="M0,150 L50,140 L100,145 L150,120 L200,128 L250,95 L300,105 L350,78 L400,85 L450,55 L500,60 L550,30 L600,20" fill="none" stroke="#1FA9FF" stroke-width="2.5"/>
+      </svg>
+      <div class="chart-labels">
+        <span>WEEK 1</span><span>WEEK 2</span><span>WEEK 3</span><span>WEEK 4</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="sec-eyebrow">आम problem</div>
+    <h2 data-reveal>ज़्यादातर agencies stock market niche समझती ही नहीं.</h2>
+    <p class="lead" data-reveal>Generic marketing agency आपका ad account उड़ा देती है, केवल vanity metrics दिखाती है, और आख़िर में channel में random, dead leads भर देती है.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card" data-reveal>
+        <div class="bear-tag">▼ ISSUE 01</div>
+        <h3>Fake / bot joins</h3>
+        <p>Numbers अच्छे लगते हैं, पर channel में engagement zero. Client trust टूट जाता है.</p>
+      </div>
+      <div class="problem-card" data-reveal>
+        <div class="bear-tag">▼ ISSUE 02</div>
+        <h3>Meta account bans</h3>
+        <p>Finance niche की ads Meta ki policy को समझे बिना बनाई जाएँ तो account restrict हो जाता है.</p>
+      </div>
+      <div class="problem-card" data-reveal>
+        <div class="bear-tag">▼ ISSUE 03</div>
+        <h3>Random audience</h3>
+        <p>Trading में कोई interest ही नहीं रखने वाले लोग channel join कर लेते हैं, फिर leave कर देते हैं.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="process">
+  <div class="wrap">
+    <div class="sec-eyebrow">हमारा process</div>
+    <h2 data-reveal>Sirf stock market Telegram lead-gen ke liye बना workflow.</h2>
+    <p class="lead" data-reveal>हर step compliance और quality को ध्यान में रखकर design किया गया है — शुरू से आख़िर तक.</p>
+
+    <div class="process-list">
+      <div class="p-row" data-reveal>
+        <div class="p-num">01</div>
+        <div>
+          <h3>Audience Research</h3>
+          <p>आपके channel के actual content — options, swing trading, IPO updates, learning इत्यादि — के हिसाब से सही audience segment तय करते हैं.</p>
+        </div>
+      </div>
+      <div class="p-row" data-reveal>
+        <div class="p-num">02</div>
+        <div>
+          <h3>Compliant Ad Creative</h3>
+          <p>Meta की financial-services ad policy को follow करते हुए creatives बनाते हैं, ताकि account restrict होने का risk ना रहे.</p>
+        </div>
+      </div>
+      <div class="p-row" data-reveal>
+        <div class="p-num">03</div>
+        <div>
+          <h3><svg class="icon-inline" width="16" height="10" viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg"><path d="M10,20 C4,20 2,14 2,9 C2,4 5,1 8.5,1 C12,1 14.5,4 17,8 C19.5,4 22,1 25.5,1 C29,1 32,4 32,9 C32,14 30,20 24,20 C20,20 17.5,15.5 17,14 C16.5,15.5 14,20 10,20 Z" fill="none" stroke="#1FA9FF" stroke-width="3.4"/></svg>Meta Campaign Launch</h3>
+          <p>Facebook + Instagram पर targeted campaigns run करते हैं, direct Telegram join-link की तरफ़.</p>
+        </div>
+      </div>
+      <div class="p-row" data-reveal>
+        <div class="p-num">04</div>
+        <div>
+          <h3>Daily Optimization</h3>
+          <p>Cost-per-join, drop-off aur engagement track करके campaigns को रोज़ाना optimize करते हैं.</p>
+        </div>
+      </div>
+      <div class="p-row" data-reveal>
+        <div class="p-num">05</div>
+        <div>
+          <h3>Transparent Reporting</h3>
+          <p>Har din ka data — spend, joins, cost-per-lead — clear reporting में मिलता है, कोई vague numbers नहीं.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="sec-eyebrow">क्यों Grow One Ads</div>
+    <h2 data-reveal>एक ही niche पर focus — इसलिए बेहतर result.</h2>
+    <p class="lead" data-reveal>हम हर तरह की agency नहीं हैं. हम सिर्फ़ stock market / finance Telegram creators के साथ काम करते हैं.</p>
+
+    <div class="why-grid">
+      <div class="why-card" data-reveal>
+        <div class="icon mono">01</div>
+        <h3>Niche-only expertise</h3>
+        <p>हमारे सारे test, creatives और targeting सिर्फ़ trading/investing audience पर आधारित हैं.</p>
+      </div>
+      <div class="why-card" data-reveal>
+        <div class="icon mono">02</div>
+        <h3>Zero fake activity</h3>
+        <p>कोई bots, कोई click-farms नहीं. सिर्फ़ genuine Meta ad traffic से आए हुए joins.</p>
+      </div>
+      <div class="why-card" data-reveal>
+        <div class="icon mono">03</div>
+        <h3>Policy-safe creatives</h3>
+        <p>हर ad Meta की financial-advertising guidelines के अंदर रहकर बनाई जाती है — account safety पहले.</p>
+      </div>
+      <div class="why-card" data-reveal>
+        <div class="icon mono">04</div>
+        <h3>Daily transparency</h3>
+        <p>Spend और joins का live data — कोई छुपाव नहीं, सीधा dashboard/report में.</p>
+      </div>
+    </div>
+
+    <div class="stats-strip" data-reveal>
+      <div class="stat">
+        <div class="n mono">100%</div>
+        <div class="l">Organic Meta ad traffic</div>
+      </div>
+      <div class="stat">
+        <div class="n mono">0</div>
+        <div class="l">Bots ya fake joins used</div>
+      </div>
+      <div class="stat">
+        <div class="n mono">Daily</div>
+        <div class="l">Reporting cycle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="lead-form">
+  <div class="wrap">
+    <div class="form-card">
+      <div class="form-side" data-reveal>
+        <div class="sec-eyebrow">शुरू करें</div>
+        <h2>अपने Telegram channel का Free Ad Audit लें.</h2>
+        <p>नीचे details भरें — हमारी टीम आपके channel और niche को analyse करके बताएगी कि Meta ads से realistic रूप से क्या result expect कर सकते हैं.</p>
+        <ul>
+          <li>Free audience & competitor analysis</li>
+          <li>Suggested ad budget range</li>
+          <li>No obligation, no spam</li>
+        </ul>
+      </div>
+
+      <form id="leadForm" data-reveal>
+        <div>
+          <label for="name">आपका नाम</label>
+          <input type="text" id="name" required placeholder="जैसे: Rahul Sharma">
+        </div>
+        <div>
+          <label for="channel">Telegram Channel / Business नाम</label>
+          <input type="text" id="channel" required placeholder="जैसे: Bull Street Traders">
+        </div>
+        <div>
+          <label for="contact">WhatsApp Number</label>
+          <input type="tel" id="contact" required placeholder="+91">
+        </div>
+        <div>
+          <label for="budget">मासिक Ad Budget (approx.)</label>
+          <select id="budget">
+            <option>₹10,000 – ₹25,000</option>
+            <option>₹25,000 – ₹50,000</option>
+            <option>₹50,000 – ₹1,00,000</option>
+            <option>₹1,00,000+</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">Free Telegram Audit Request भेजें</button>
+        <div class="form-msg" id="formMsg">धन्यवाद! हमारी टीम 24 घंटे में आपसे WhatsApp पर संपर्क करेगी.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="disclaimer">
+  <div class="wrap">
+    <h4>Disclaimer</h4>
+    <p>
+      Grow One Ads एक digital marketing / advertising agency है और केवल Meta (Facebook & Instagram) ads के ज़रिए Telegram lead-generation व channel-growth services प्रदान करती है. हम किसी भी प्रकार की investment, trading या financial advice नहीं देते हैं और न ही SEBI-registered investment adviser हैं. Stock market में निवेश जोखिमों के अधीन है; निवेश से पहले अपने financial advisor से सलाह लें. हम किसी भी returns, profits या account growth की गारंटी नहीं देते — हमारी सेवा केवल targeted ad campaigns के ज़रिए genuine audience तक पहुँच सुनिश्चित करने तक सीमित है. सभी campaigns Meta की advertising policies के अनुरूप चलाई जाती हैं; हम किसी भी प्रकार के bots, fake accounts या click-farms का उपयोग नहीं करते. Lead volume और cost-per-lead niche, budget, creative quality और market conditions के अनुसार अलग-अलग हो सकते हैं.
+    </p>
+  </div>
+</div>
+
+<footer>
+  © 2026 Grow One Ads · Meta Ads for Stock Market Telegram Growth
+</footer>
+
+<script>
+  // Ticker content
+  const events = [
+    {type:'up', text:'New Telegram Join', loc:'Mumbai'},
+    {type:'up', text:'Campaign Impression', loc:'Delhi NCR'},
+    {type:'down', text:'CPL Optimized', loc:'Bengaluru'},
+    {type:'up', text:'New Telegram Join', loc:'Pune'},
+    {type:'up', text:'Ad Creative A/B Test', loc:'Live'},
+    {type:'up', text:'New Telegram Join', loc:'Ahmedabad'},
+    {type:'down', text:'Cost Per Join', loc:'Trending Down'},
+    {type:'up', text:'New Telegram Join', loc:'Jaipur'},
+    {type:'up', text:'Audience Match Rate', loc:'High'},
+    {type:'up', text:'New Telegram Join', loc:'Hyderabad'},
+  ];
+  const track = document.getElementById('tickerTrack');
+  const buildTicker = () => {
+    let html = '';
+    for(let i=0;i<3;i++){
+      events.forEach(e=>{
+        const symbol = e.type === 'up' ? '▲' : '▼';
+        const cls = e.type === 'up' ? 'up' : 'down';
+        html += `<span class="tick-item"><span class="${cls}">${symbol}</span> ${e.text} — <b>${e.loc}</b></span>`;
+      });
+    }
+    track.innerHTML = html;
+  };
+  buildTicker();
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Form submit (UI only, no backend)
+  const form = document.getElementById('leadForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.style.display = 'block';
+    form.querySelector('.submit-btn').textContent = 'Request भेज दी गई ✓';
+    form.querySelector('.submit-btn').disabled = true;
+  });
+</script>
+
+</body>
+</html>
